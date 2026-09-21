@@ -72,3 +72,15 @@ cd ~/app && git pull
 ./.venv/bin/pip install -r requirements.txt
 sudo systemctl restart pythonapp
 ```
+
+## Deploy automático
+
+El workflow .github/workflows/deploy.yml se ejecuta en cada push a main: entra al servidor por SSH usando una llave guardada en GitHub Secrets, hace git pull, reinstala dependencias dentro del virtualenv y reinicia el servicio.
+
+Secrets necesarios en el repositorio:
+
+| Secret | Contenido |
+| --- | --- |
+| SERVER_HOST | IP pública del servidor |
+| SERVER_USER | usuario SSH |
+| SSH_PRIVATE_KEY | llave privada de deploy |
