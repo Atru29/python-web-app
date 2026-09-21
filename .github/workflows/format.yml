@@ -1,0 +1,27 @@
+name: Format
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Clonar el repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Ruff
+        run: pip install ruff
+
+      - name: Revisar formato
+        run: ruff format --check .
+
+      - name: Revisar calidad de codigo
+        run: ruff check .
